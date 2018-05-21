@@ -1,5 +1,7 @@
 from flask import Flask
 
+from loader import Loader
+
 app = Flask(__name__)
 
 
@@ -9,4 +11,5 @@ def hello_world():
 
 
 if __name__ == '__main__':
+    loader = Loader().download_all_models()
     app.run()

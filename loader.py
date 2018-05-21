@@ -32,7 +32,7 @@ class Loader:
             return False
         return True
 
-    def load_all(self):
+    def download_all_models(self):
         if not self.load_check():
             self.load_embeddings()
             self.load_trainables()
