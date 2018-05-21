@@ -6,7 +6,7 @@ from loader import Loader
 from serializer import EmbeddingSerializer
 
 app = Flask(__name__)
-embedding_model = Embeddings()
+embedding_model = None
 
 
 @app.route('/', methods=['GET'])
@@ -37,6 +37,11 @@ def set_up():
         content = request.get_json()
         if content['key'] == 'fox':
             Loader().download_all_models()
+        if content['key'] == 'snake':
+            embedding_model = Embeddings()
+        if content['key'] == 'sitara':
+            Loader().download_all_models()
+            embedding_model = Embeddings()
         return 'All data is downloaded'
 
 
