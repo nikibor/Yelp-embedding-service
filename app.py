@@ -1,6 +1,6 @@
-from flask import Flask, request
 import requests
-from flask import jsonify
+from flask import Flask, request
+
 from embeddings import Embeddings
 from loader import Loader
 from serializer import EmbeddingSerializer
@@ -22,9 +22,8 @@ def embedding():
         if serializer.is_valid():
             text = serializer.text
             redirected_url = serializer.redirected_url
-            vector = embedding_model.build_sentence_vector(text).tolist()
-            response = jsonify({"embedding": vector})
-            requests.post(url=redirected_url,json=response)
+            vector = Embeddings().build_sentence_vector(text).tolist()
+            requests.post(url=redirected_url, json={'vector': vector})
             return "Embedding build"
     else:
         return 'Error'
