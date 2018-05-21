@@ -9,6 +9,11 @@ app = Flask(__name__)
 embedding_model = Embeddings()
 
 
+@app.route('/',methods=['GET'])
+def index():
+    return "Vector service is working"
+
+
 @app.route('/api/embedding', methods=['POST'])
 def embedding():
     if request.is_json:
