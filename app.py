@@ -9,7 +9,7 @@ app = Flask(__name__)
 embedding_model = Embeddings()
 
 
-@app.route('/',methods=['GET'])
+@app.route('/', methods=['GET'])
 def index():
     return "Vector service is working"
 

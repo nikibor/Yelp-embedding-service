@@ -9,6 +9,7 @@ docutils==0.14
 Flask==1.0.2
 gensim==3.4.0
 googledrivedownloader==0.3
+gunicorn==19.8.1
 idna==2.6
 itsdangerous==0.24
 Jinja2==2.10
