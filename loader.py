@@ -28,7 +28,7 @@ class Loader:
     @staticmethod
     def load_check() -> bool:
         files = os.listdir('./data')
-        if not files:
+        if len(files) == 1:
             return False
         return True
 
