@@ -1,10 +1,11 @@
 from gensim.models import Word2Vec
 import numpy as np
 
+
 class Embeddings:
 
     def __init__(self):
-        self.embedding_model = Word2Vec.load('./data/Yelp_embeddings')
+       self.embedding_model = Word2Vec.load('./data/Yelp_embedings')
 
     def build_sentence_vector(self, sentence):
         words = sentence.split()
