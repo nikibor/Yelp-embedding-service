@@ -22,8 +22,9 @@ def embedding():
         if serializer.is_valid():
             text = serializer.text
             redirected_url = serializer.redirected_url
+            hashkey = serializer.hashkey
             vector = Embeddings().build_sentence_vector(text).tolist()
-            requests.post(url=redirected_url, json={'vector': vector})
+            requests.post(url=redirected_url, json={'vector': vector, 'hashkey': hashkey})
             return "Embedding build"
     else:
         return 'Error'

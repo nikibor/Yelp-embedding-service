@@ -11,5 +11,5 @@ class EmbeddingSerializer:
             self.text = self.data['text']
             self.redirected_url = self.data['redirected_url']
             self.hashkey = self.data['hashkey']
-            return self.text != '' or self.redirected_url != '' or self.hashkey != ''
+            return self.text != '' and self.redirected_url != '' and self.hashkey != ''
         return False
