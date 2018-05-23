@@ -4,10 +4,12 @@ class EmbeddingSerializer:
         self.data = data
         self.text = ''
         self.redirected_url = ''
+        self.hashkey = ''
 
     def is_valid(self):
         if self.data:
             self.text = self.data['text']
             self.redirected_url = self.data['redirected_url']
-            return True
+            self.hashkey = self.data['hashkey']
+            return self.text != '' or self.redirected_url != '' or self.hashkey != ''
         return False
