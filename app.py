@@ -1,3 +1,5 @@
+import json
+
 import requests
 from flask import Flask, request
 
@@ -25,6 +27,22 @@ def embedding():
             vector = Embeddings().build_sentence_vector(text).tolist()
             requests.post(url=redirected_url, json={'vector': vector})
             return "Embedding build"
+    else:
+        return 'Error'
+    return 'OK'
+
+
+@app.route('/api/debug/embedding', methods=['POST'])
+def debug_embedding():
+    if request.is_json:
+        content = request.get_json()
+        serializer = EmbeddingSerializer(data=content)
+        if serializer.is_valid():
+            text = serializer.text
+            vector = Embeddings().build_sentence_vector(text).tolist()
+            result = {'vector': vector}
+            json_data = json.dumps(result)
+            return json_data
     else:
         return 'Error'
     return 'OK'
