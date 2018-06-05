@@ -1,6 +1,6 @@
 import requests
 from flask import Flask, request
-
+import json
 from embeddings import Embeddings
 from loader import Loader
 from serializer import EmbeddingSerializer
@@ -14,21 +14,28 @@ def index():
     return "Vector service is working"
 
 
+# {
+#     "text": "qwerty",
+#     "token": "asdadasdasdasd"
+# }
 @app.route('/api/embedding', methods=['POST'])
 def embedding():
     if request.is_json:
         content = request.get_json()
         serializer = EmbeddingSerializer(data=content)
-        if serializer.is_valid():
-            text = serializer.text
-            redirected_url = serializer.redirected_url
-            hashkey = serializer.hashkey
-            vector = Embeddings().build_sentence_vector(text).tolist()
-            requests.post(url=redirected_url, json={'vector': vector, 'hashkey': hashkey})
-            return "Embedding build"
-    else:
-        return 'Error'
-    return 'OK'
+        if not serializer.is_valid():
+            return 'Error'
+        text = serializer.text
+        token = serializer.token
+        vector = Embeddings().build_sentence_vector(text).tolist()
+        data = json.dumps(
+            {
+                "vector": vector,
+                "token": token
+            }
+        )
+        return data
+
 
 
 @app.route('/api/setup', methods=['POST'])
